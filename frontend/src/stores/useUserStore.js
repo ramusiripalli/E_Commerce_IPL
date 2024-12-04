@@ -28,7 +28,6 @@ export const useUserStore = create((set, get) => ({
 
 		try {
 			const res = await axios.post("/auth/login", { email, password });
-
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -72,9 +71,8 @@ export const useUserStore = create((set, get) => ({
 	},
 }));
 
-// TODO: Implement the axios interceptors for refreshing access token
 
-// Axios interceptor for token refresh
+//Axios interceptor for token refresh
 let refreshPromise = null;
 
 axios.interceptors.response.use(
