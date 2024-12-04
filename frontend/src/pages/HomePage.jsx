@@ -6,7 +6,7 @@ const categories = [
 	{ href: "/bats", name: "Bats", imageUrl: "/bats.png" },
 	{ href: "/t-shirts", name: "IPL T-shirts", imageUrl: "/iplteaShirts.jpg" },
 	{ href: "/shoes", name: "Shoes", imageUrl: "/shoes.png" },
-	{ href: "/kits", name: "Cricket Kit", imageUrl: "/cricketKit.png" },
+	{ href: "/kit", name: "Cricket Kit", imageUrl: "/cricketKit.png" },
 	{ href: "/helmets", name: "Helmets", imageUrl: "/helmet.png" },
 	{ href: "/caps", name: "Caps", imageUrl: "/caps.png" },
 	
