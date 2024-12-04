@@ -32,15 +32,17 @@ const setCookies = (res, accessToken, refreshToken) => {
 		maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 	});
 };
-
+const IPL_TEAMS = ['RCB', 'MI', 'CSK', 'KKR', 'DC', 'SRH', 'RR', 'PBKS', 'GT', 'LSG'];
+const assignIPLTeam = () => IPL_TEAMS[Math.floor(Math.random() * IPL_TEAMS.length)];
 export const signup = async (req, res) => {
 	const { email, password, name } = req.body;
+	const team = assignIPLTeam();
 	try {
 		const userExists = await User.findOne({ email });
 		if (userExists) {
 			return res.status(400).json({ message: "User already exists" });
 		}
-		const user = await User.create({ name, email, password });
+		const user = await User.create({ name, email, password,team});
 		const { accessToken, refreshToken } = generateTokens(user._id);
 		await storeRefreshToken(user._id, refreshToken);
 		setCookies(res, accessToken, refreshToken);
@@ -50,6 +52,8 @@ export const signup = async (req, res) => {
 			name: user.name,
 			email: user.email,
 			role: user.role,
+			team:team,
+			message: `Welcome to the ${team} Fan Store! `
 		});
 	} catch (error) {
 		console.log("Error in signup controller", error.message);
@@ -72,6 +76,7 @@ export const login = async (req, res) => {
 				name: user.name,
 				email: user.email,
 				role: user.role,
+				team: user.team
 			});
 		} else {
 			res.status(400).json({ message: "Invalid email or password" });
